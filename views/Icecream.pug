@@ -2,7 +2,7 @@ extends layout
  
 block content
   h1= title
-  - let items = results;
+  
   - let o;
   script.
       function buy(a)
@@ -11,10 +11,9 @@ block content
       }
  
   div(class="container-fluid")
- 
-  - let result=[{Icecream_flavour:"Chocolate", Icecream_toppings:"chocochips", Icecream_price:"10"},{Icecream_flavour:"Butterscotch", Icecream_toppings:"tootyfrooti",Icecream_price:"15"},{Icecream_flavour:"Vanilla", Icecream_toppings:"berrychips",Icecream_price:"20"}]
+  - let items = results;
   div(class="row")
-    each form,item in results 
+    each form,item in items 
         div(class = "col-sm-2 bg-secondary" onclick=`buy(${item})`) #{form.Icecream_flavour}              
         div(class = "col-sm-2 bg-secondary" onclick=`buy(${item})`) #{form.Icecream_toppings}                
         div(class = "col-sm-2 bg-secondary" onclick=`buy(${item})`) #{form.Icecream_price}
