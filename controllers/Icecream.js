@@ -12,10 +12,19 @@ exports.Icecream_list = async function(req, res) {
     };
 
 
-// for a specific Costume.
-exports.Icecream_detail = function(req, res) {
-res.send('NOT IMPLEMENTED: Icecream detail: ' + req.params.id);
-};
+// for a specific Icecream.
+exports.Icecream_detail = async function(req, res) {
+    console.log("detail" + req.params.id)
+    try {
+    result = await Icecream.findById( req.params.id)
+    res.send(result)
+    } catch (error) {
+    res.status(500)
+    res.send(`{"error": document for id ${req.params.id} not found`);
+    }
+    };
+
+
 // Handle Costume create on POST.
 exports.Icecream_create_post = function(req, res) {
 res.send('NOT IMPLEMENTED: Icecream create POST');
@@ -24,10 +33,27 @@ res.send('NOT IMPLEMENTED: Icecream create POST');
 exports.Icecream_delete = function(req, res) {
 res.send('NOT IMPLEMENTED: Icecream delete DELETE ' + req.params.id);
 };
+
 // Handle Costume update form on PUT.
-exports.Icecream_update_put = function(req, res) {
-res.send('NOT IMPLEMENTED: Icecream update PUT' + req.params.id);
-};
+exports.Icecream_update_put = async function(req, res) {
+    console.log(`update on id ${req.params.id} with body
+    ${JSON.stringify(req.body)}`)
+    try {
+    let toUpdate = await Icecream.findById( req.params.id)
+    // Do updates of properties
+    if(req.body.Icecream_flavour)
+    toUpdate.Icecream_flavour = req.body.Icecream_flavour;
+    if(req.body.Icecream_toppings) toUpdate.Icecream_toppings = req.body.Icecream_toppings;
+    if(req.body.Icecream_price) toUpdate.Icecream_price = req.body.Icecream_price;
+    let result = await toUpdate.save();
+    console.log("Sucess " + result)
+    res.send(result)
+    } catch (err) { 
+    res.status(500)
+    res.send(`{"error": ${err}: Update for id ${req.params.id}
+    failed`);
+    }
+    };
 
 // Handle a show all view
 exports.Icecream_view_all_Page = async function(req, res) {
