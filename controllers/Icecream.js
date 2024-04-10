@@ -29,12 +29,20 @@ exports.Icecream_detail = async function(req, res) {
 exports.Icecream_create_post = function(req, res) {
 res.send('NOT IMPLEMENTED: Icecream create POST');
 };
-// Handle Costume delete from on DELETE.
-exports.Icecream_delete = function(req, res) {
-res.send('NOT IMPLEMENTED: Icecream delete DELETE ' + req.params.id);
-};
+// Handle Icecream delete from on DELETE.
+exports.Icecream_delete = async function(req, res) {
+    console.log("delete " + req.params.id)
+    try {
+    result = await Icecream.findByIdAndDelete( req.params.id)
+    console.log("Removed " + result)
+    res.send(result)
+    } catch (err) {
+    res.status(500)
+    res.send(`{"error": Error deleting ${err}}`);
+    }
+    };
 
-// Handle Costume update form on PUT.
+// Handle icecream update form on PUT.
 exports.Icecream_update_put = async function(req, res) {
     console.log(`update on id ${req.params.id} with body
     ${JSON.stringify(req.body)}`)
