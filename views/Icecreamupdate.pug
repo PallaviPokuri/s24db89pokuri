@@ -1,0 +1,64 @@
+extends layout
+
+block content
+  h1= title
+
+  if(toShow == null)
+    h2 No instance to update
+
+  else
+    - let Icecreamid = toShow._id
+    - let Icecream_flavour = toShow.Icecream_flavour
+    - let Icecream_toppings = toShow.Icecream_toppings
+    - let Icecream_price = toShow.Icecream_price
+    - let actionid = "/resource/Icecream/" + Icecreamid
+
+    script let actionid = "#{actionid}"
+
+    div.row(class='mb-2')
+      div.mr-1 ID is
+        span(style="color:red")  #{Icecreamid}
+
+    form(id='IcecreamForm', action= actionid, method="PUT")
+      div.form-group
+        div(class="row g-3 align-items-center")
+          div(class="col-1")
+            label.IcecreamAttr(for='Icecream_flavour',class="col-form-label") Icecream Flavour
+          div(class="col-auto")
+            input#Icecream_flavour(type='text', name='Icecream_flavour',class="form-control", value=Icecream_flavour)
+
+      div.form-group
+        div(class="row g-3 align-items-center")
+          div(class="col-1")
+            label.IcecreamAttr(for='Icecream_toppings',class="col-form-label") Icecream Toppings
+          div(class="col-auto")
+            input#Icecream_toppings(type='text', name='Icecream_toppings',class="form-control", value=Icecream_toppings)
+
+      div.form-group
+        div(class="row g-3 align-items-center")
+          div(class="col-1")
+            label.IcecreamAttr(for='Icecream_price',class="col-form-label") Icecream Price
+          div(class="col-auto")
+            input#Icecream_price(type='number', name='Icecream_price',class="form-control", value=Icecream_price)
+
+      input(class="btn btn-danger m-2" type="submit")
+        //- button(class="btn btn-danger m-2" onclick="deleteOnid()") Delete
+      button(class="btn btn-secondary m-2" onclick="cancel()") Cancel
+
+    script.
+      document.forms['IcecreamForm'].addEventListener('submit', (event) => {
+        event.preventDefault();
+        // TODO do something here to show user that form is being submitted
+        fetch(event.target.action, {
+          method: 'PUT',
+          body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+        }).then((resp) => {
+          return resp.json(); // or resp.text() or whatever the server sends
+        }).then((body) => {
+          alert("Update succeded")
+          // TODO handle body
+        }).catch((error) => {
+          // TODO handle error
+          alert("Update failed " + error )
+        });
+      });
