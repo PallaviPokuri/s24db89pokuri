@@ -15,5 +15,8 @@ router.get('/', Icecream_controlers.Icecream_view_all_Page );
 /* GET detail costume page */
 router.get('/detail', Icecream_controlers.Icecream_view_one_Page);
 
+/* GET create costume page */
+router.get('/create', Icecream_controlers.Icecream_create_Page);
+
 module.exports = router;
 
