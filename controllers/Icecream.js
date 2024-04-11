@@ -35,7 +35,7 @@ exports.Icecream_delete = async function(req, res) {
     try {
     result = await Icecream.findByIdAndDelete( req.params.id)
     console.log("Removed " + result)
-    res.send(result)
+    res.send(result) 
     } catch (err) {
     res.status(500)
     res.send(`{"error": Error deleting ${err}}`);
@@ -92,5 +92,19 @@ exports.Icecream_create_post = async function(req, res) {
     catch(err){
     res.status(500);
     res.send(`{"error": ${err}}`);
+    }
+    };
+
+// Handle a show one view with id specified by query
+exports.Icecream_view_one_Page = async function(req, res) {
+    console.log("single view for id " + req.query.id)
+    try{
+    result = await Icecream.findById( req.query.id)
+    res.render('Icecreamdetail',
+    { title: 'Icecream Detail', toShow: result });
+    }
+    catch(err){
+    res.status(500)
+    res.send(`{'error': '${err}'}`);
     }
     };

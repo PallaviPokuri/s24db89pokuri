@@ -12,5 +12,8 @@ var router = express.Router();
 /* GET Icecreams */
 router.get('/', Icecream_controlers.Icecream_view_all_Page );
 
+/* GET detail costume page */
+router.get('/detail', Icecream_controlers.Icecream_view_one_Page);
 
 module.exports = router;
+

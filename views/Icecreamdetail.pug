@@ -1,0 +1,21 @@
+extends layout
+block content
+  - if (toShow != null)
+    h1(class='detailh1')= title
+
+    - let Icecreamid = toShow._id
+    - let Icecream_flavour = toShow.Icecream_flavour
+    - let Icecream_toppings = toShow.Icecream_toppings
+    - let Icecream_price = toShow.Icecream_price
+    div
+      div.row
+        div(class='IcecreamAttr mr-3') Icecream ID is:#{Icecreamid}
+      div.row
+        div(class='IcecreamAttr mr-3') Icecream Flavour is:#{Icecream_flavour}
+      div.row
+        div(class='IcecreamAttr mr-3') Icecream Toppings is:#{Icecream_toppings}
+      div.row
+        div(class='IcecreamAttr mr-3') Icecream Price is:#{Icecream_price}
+  - else
+    h1 Goat Details
+    h2 No instance to detail
