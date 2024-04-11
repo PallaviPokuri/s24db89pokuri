@@ -21,5 +21,8 @@ router.get('/create', Icecream_controlers.Icecream_create_Page);
 /* GET create update page */
 router.get('/update', Icecream_controlers.Icecream_update_Page);
 
+/* GET delete costume page */
+router.get('/delete', Icecream_controlers.Icecream_delete_Page);
+
 module.exports = router;
 
